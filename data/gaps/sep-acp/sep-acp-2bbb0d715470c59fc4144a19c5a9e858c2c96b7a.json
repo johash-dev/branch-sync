@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "id": "sep-acp-2bbb0d715470c59fc4144a19c5a9e858c2c96b7a",
+  "pairId": "sep-acp",
+  "integrationSha": "2bbb0d715470c59fc4144a19c5a9e858c2c96b7a",
+  "sourceSubject": "Merged PR 19799: fix: #37946 update service type handling in TuitionOptionsFormComponent to improve dynamic updates and filtering",
+  "snapshotId": "17165ca4-f773-4cb7-b998-d1ace471c057",
+  "requirements": [
+    {
+      "id": "sep-acp-2bbb0d715470c59fc4144a19c5a9e858c2c96b7a-1",
+      "behavior": "Refresh tuition service-type availability on form changes with string-normalized selection",
+      "classification": "superseded",
+      "rationale": "Intermediate #37946 wiring is fully replaced by the later ng-select/serviceOptionsByRow fix in abc7df00, which is already present in ACP EP tuition options.",
+      "sourceEvidence": [
+        "2bbb0d71 TuitionOptionsFormComponent updateAvailableServiceTypes/getSelectedServiceTypeValues/L1 filter"
+      ],
+      "targetEvidence": [
+        "495992e EP tuition-options-form cumulative serviceOptionsByRow path (via abc7df00)"
+      ],
+      "dependencies": [],
+      "featureArea": "ep-tuition-options",
+      "groupKey": "tuition-service-type-filtering",
+      "impact": "Do not port this intermediate shape separately; use the later service-type filtering behavior."
+    }
+  ],
+  "status": "open",
+  "updatedAt": "2026-09-30T20:16:32.055Z"
+}

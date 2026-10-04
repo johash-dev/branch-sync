@@ -1,0 +1,405 @@
+{
+  "version": 1,
+  "id": "562baeaa-4692-4264-b63c-24609bcad872",
+  "pairId": "sep-acp",
+  "createdAt": "2026-09-30T11:06:47.473Z",
+  "sourceSha": "2c81cbde5c3bf4aac4ff1b4b801334505632bd37",
+  "targetSha": "4644ef4de372f1f349a2f6f847907a8b74dc296a",
+  "baselineSha": "d9234c0bc10c39cd54f58c80c6493bf569c37242",
+  "fetchedAt": "2026-09-30T11:06:47.473Z",
+  "offline": false,
+  "knowledgeHash": "40f512b9c03e2b32f65285afff45c2bd84a6307952b9259796ecfb5d76d0f5e6",
+  "configHash": "bef2b239c07284e6654c9c9902d24eb4f5d671f00c276e255c5ebbca91adc309",
+  "events": [
+    {
+      "sha": "d1be9b080be463e1a579fa239c4586c68e435582",
+      "parent": "d9234c0bc10c39cd54f58c80c6493bf569c37242",
+      "subject": "Merged PR 19655: fix: #37855 improve user center sorting and enhance form handling in GratefulParents components",
+      "date": "2026-08-14T06:51:06Z",
+      "constituentCommits": [
+        "b12ff7346c6a9422b5df588a02b76585efcd4209"
+      ],
+      "files": [
+        {
+          "status": "M",
+          "path": "apps/eval-portal/src/app/auth-guard/auth.service.ts"
+        },
+        {
+          "status": "M",
+          "path": "apps/eval-portal/src/app/auth-guard/can-load.ts"
+        },
+        {
+          "status": "M",
+          "path": "libs/eval-portal/admin-portal/center-admin/feature/src/lib/grateful-parents/grateful-parents-act/grateful-parents-act-form/grateful-parents-act-form.component.ts"
+        },
+        {
+          "status": "M",
+          "path": "libs/eval-portal/admin-portal/center-admin/feature/src/lib/grateful-parents/grateful-parents-sat/grateful-parents-sat-form/grateful-parents-sat-form.component.ts"
+        },
+        {
+          "status": "M",
+          "path": "libs/eval-portal/admin-portal/center-admin/feature/src/lib/grateful-parents/lc-grateful-parents/grateful-parents-form/grateful-parents-form.component.ts"
+        },
+        {
+          "status": "M",
+          "path": "libs/eval-portal/admin-portal/ui/src/lib/jodit-editor/jodit-editor.component.ts"
+        }
+      ],
+      "empty": false
+    },
+    {
+      "sha": "f9ed801507b9d6ab837f3e3446a16f4377a8c4bc",
+      "parent": "d1be9b080be463e1a579fa239c4586c68e435582",
+      "subject": "Merged PR 19670: QA to Develop Reverse Merge (08/17/2026)",
+      "date": "2026-08-17T10:51:13Z",
+      "constituentCommits": [
+        "1a86ae9639478f219bc30f27556ddd97390bb799",
+        "64a469f2c4369eb9e5ae86f74495f6f10905eac3",
+        "248a7510a8762b83ff1a93de8ccebd2398604531",
+        "d8e79da51958be3d56f99a4917f250826f769aa2",
+        "b5375587af2aba04fc3eda45d16d5925b6ba1bc3",
+        "17a3125b5d365570cf2d059ecea1c00f8673dd2c",
+        "0b3642d9a32f240614c87fad25bc60da8cf07419",
+        "868e51cf2cb72da976daccd5f86314c69128eb64",
+        "f04f60f9426a077dbdd2d322f9ea895b2351abbd",
+        "d270862031fb00f7c309e71d49bb8d19c38f75f9",
+        "1ec0f30ca617e85ca904299ffd478bc43ff049af",
+        "1fa63d7aabe5bf66d5b498ef1c4f758e7d3e2294",
+        "97b8fc6c4d31159db850c8844672bdac0ab96c87",
+        "af244381a71bcf015af298a1a0d77c12f0717056",
+        "4490a62dc36165b13d29102964b27f7af51b20a4",
+        "c536d7b18baf9ab5dfe4d685551c58b416a6c28e",
+        "c3c25fad2508441f5683f8891b702fa87ed9a366",
+        "40f5505867251cff0ac420adbba57b584b8ee5db",
+        "a938e5c47c80acd8ae5c658d96ae493ef0b2a270",
+        "1efaa39651883f7260470a8d621563aedc71b34c",
+        "8ae1ea666162cba0800cb35409dd38728c8f712c",
+        "dbc1c640f275814c8e66d99f5c8bc2543af702b7",
+        "628d770870fd25aa934523a54b394096c20a7d9f",
+        "a02c97de69ce5ffb716c95fa4bc1af5f36a32393",
+        "e1164ebf85a00e89fb1532baf8959d8fbdd4395c",
+        "77857a4172ae94c4f24ca1ef2f2e6a2cb64c69d5",
+        "747e29758d07e6bcb5ace55a4d442c6ddf687d5c",
+        "0198bdca5d7492ac47490bd34bd432eb84b9b5c6",
+        "1dafe71a13802240aa7e32b2bcb16c3df4e30d81",
+        "b15ddce1b81ff94d3d1f51782d7172db38488d95",
+        "894b498c5373eb666b0a6b6d34f7a2228f113826",
+        "bd364ad8c741a4e65368021c1fbf017ff7f9d1c0",
+        "a0dc875740f683f115ed828c746fa02d0a2162fc",
+        "52a061a85c553c5ab4c00c218ac564ec29968eac",
+        "c1980727a95211203f4c2d82b9ab2d55ecaf829f",
+        "a679ba44884f2e80aeb17965fcbfc1c106170286",
+        "1a19239c4dccdfa7a927333eda8cf3afb205c9e4",
+        "669ceac94850d4110f11e952ee74f4581bc9cf51",
+        "7dcdfc35e76923a87cef15202aa9312c4a3f0f61",
+        "25cbb99acf5a7dd0e706c752937b7711f35945d5",
+        "984d301c3e8d502ddac30be26e5d082bcadf42dc",
+        "7ba0f3f4a358ad467ee02f4b9cbcdd13aadc1ac5",
+        "96890d24db989db75bd44931947dac00e444c873",
+        "a3bbfcb6852fde76bfcb2cf08f46860ec0b14a91",
+        "897bf2c26c386d789d599d35475fc488a19547a1",
+        "434211735b09a8bf5530de74f0d988941c7b13bc",
+        "8c155d5a080a01b58e6d7dc9ea9a22392ea6ca86",
+        "933c42b2c77eaf67d90c52c4cfd57c55b5560836",
+        "952925a1530184b59862fb20ab65e410b47b769d",
+        "2b0a26fda4618cd08319d5a633608b893eda4383",
+        "c54d5e02e57e3329330db8228604b95f1b647bf4",
+        "ccc4c7060a1e3360020f060f6065d14f57887593",
+        "92a7f7cf42b0515c8baf79996e9295f7284cf236",
+        "d39fe8e9217c1e81e0133961af20e7f1a2a41ed5",
+        "2e9fcf432b113db3c05185fa34e5c014a0895f12",
+        "7d8b75c3e3417a17ccf4b0a99ab12d6a8ceb34b1",
+        "242c670f78dbd09f80897ee93095a1026e692c83",
+        "731890bdf6efe343a49756826e9c33da43425580",
+        "1bf31c5db1777614128f05a3fad0bf44cc5f4396",
+        "9a1ba915a268945c2cae63e2f62735dbc66857ed",
+        "a9ee8335bbae1a2958e75b04aae1cd0a0e737be3",
+        "eee05f1167bb073dd82edd43fe6ca8434a1f0338",
+        "a6a1a1438505fa6c5fe9b346eeea8cd2e7ec90f9",
+        "2c86bd48cfb83b20d9b40ecdd48fda027797a224",
+        "a0e459161446db004a185949f9ee9fd89d67fe9d",
+        "3ca09c81a5ff729c99c32f28def2587a3363a3d0",
+        "4ca8c060cef09d80136316be8edee77e6478ab26",
+        "d111833e6649ea4fdad9240be6a1304c04670519",
+        "abc634717c7c83f333432b3d59cbc30c985bc831",
+        "31872a5f2f29eb55bf5f43c25a59e8e18ea20685",
+        "25a5374356dc410f048a25e7afe6af7b9732020f",
+        "5dad22640148909a8ea3e519f44d1b14916aaf6c",
+        "2a8459ca368d18266c0d390ed7523d4bda9fea68",
+        "a3d7764c09011b905a8ff7afe322725f500f9b0a",
+        "c4b88e393e138e6cb56fa34dd5e9e2a5fea5cdf4",
+        "2db4c86459af615c5403814f8b5528ce130bba9b",
+        "b7ae27afec5afe54cd1b0a8c9a7b0a471fa3bb71",
+        "3542e7dba139376c44a1e81e446a39235a74b629",
+        "deee52d0fb2647559db98c79192d4ef74c3c962a",
+        "db2af978fc2e27fa96d4680bc14e711a8840076e",
+        "80af0e418ffd3a29391fb9f85c06f3b481e0c8bd",
+        "7c9ed726e8d95087ab931ea9824dfc0cea7cefb1",
+        "9a098b037c120669b71629082100651ebe9e5ff9",
+        "a995f5dc41df3436d254a2a97428d2d5ce68d1db",
+        "837d954fcccdc2ff6dca5fb124a78d8dbf48260d",
+        "e3982bccb8407064d80d1bb4cb1d51d86f706127",
+        "ff2733a01e15935413e7d4a8bf0b2e63428a0596",
+        "6bf46b373a23f28214cd083ce2e13e7d21351034",
+        "33350e8f460260c37d0daeb5fd46ff1fe1fe6823",
+        "be993e4681e01b07f79a89943e58281a257ad434",
+        "e0dd91e2fc1b795c1f245ab5de60f84bd91e32f8",
+        "c4c91bf2829abe06cf0e85814d00d36cfc7c7fc0",
+        "d8044f190cf77f732bc3c5b3188924dadbc22086",
+        "338fdd506046b09aeb5c00f6f535af795edb14ae",
+        "f6ebd96ebeeb89731d673aa1ce395a20f162930c",
+        "6a4c521579f47a043f3464e75146813f63f9674d",
+        "0501f164537e38b469290b37820a741cf5b7acc9",
+        "fc9287d83885ae9b730a726434e211f09175194b",
+        "bb7cb55fa885b46f1c2ef2a50c015468a59b979a",
+        "e2fa54377cee8a7e43cb671586eefae8185b99c0",
+        "629f731bcf68a70b4c38ca8d50085fa370e330a2",
+        "7f416bbc957480c2b4ac26645eb22227804c1d75",
+        "921d22e763644d0fff5a3cc785549ce221ff1c6d",
+        "b51b26122838254f757c7334424537dbf0fbb926",
+        "54872a435ffbe3d573dca4071bf6ad6b25fef005",
+        "8ac2cbc9f1b4125337dbe85969c1b528f084b3e5",
+        "0cf59180f111220e5c11e81aa79be7becb479786",
+        "8f56a1d6542d0f121cf3824d17134373b29530bd",
+        "730038f539d35c1447b247c4b3e84ab9dba21007",
+        "9024a56fce1d5039dfea69eb27eb28725f8d8f32",
+        "6cdd219b610c3156885454221cdf2db6c50f262d",
+        "5d91f5e44b6edf65001187b9cfeff5f01cded1e8",
+        "28b95bde541dffc5dd80603a535132a48f796af3",
+        "acae15290346be296efee4d571cbe975f7c78131",
+        "f26524c01544189aac3bd9eddb8ab54473887238",
+        "74e3b36a15075703d29a5f6a142523b82830b948",
+        "ce2b41b875b48ce105c0809bde0a82578fea6c71",
+        "d30ac47da56811611e90fb4c06ec3e81dc551b9c",
+        "df279ce5193595981b09fe33d518bbffcb8797d6",
+        "0c6a740e0cfc12c16aed97cd0ce2f89f98b914c7",
+        "7c74765428218d43d33a4501b4c8b162f93be0aa",
+        "a48e46dfc12d8ca79e0f266ba45502521fe88b0c",
+        "d027bbb1d8f270b7bd97a60ff23220de0e5ce105",
+        "583529433dd9d9783ced17002964d59afb16e365",
+        "1fa8153dcc8916ba38a7bc674feacf89aa50b9c3",
+        "98df9fe572665100f052c1208379f3776244c23d",
+        "bddde07d0f5fff5f38dd8dfad47b88cd8c7d2709",
+        "6dc2f646d20513d6dea612bea97211a6dc5e36c8",
+        "38244f135f846fcdd4ac7ead73777f8a3f2d5873",
+        "d7ef1a7deba222649a3f455031060b4f1b972da6",
+        "800d9c02ed7810595e145db7febedba228398386",
+        "d1d1182414660bd2207133da2002f8bd7663ce72",
+        "e7f480833a50a3774dc9603e5bf8e6431c53da82",
+        "54dcb446b97f902fdd772c543effadd89f93690e",
+        "3841c223df30c57f5226b51968aba0a16fc8e483",
+        "508d02c371308982145277147f588f08bbe35913",
+        "614280d8646dee0e1570d3d27d60d5476ce6e9fc",
+        "f5ab996635ec1b69016660f3c81330dd97fa0675",
+        "3c75adf1019fad915e9d223907223f96b005d6cb",
+        "427cc5aa94e3c02326b70a6dc17a1bd1a3506568",
+        "caf8b505e113bcada2531b80d0ffe9b7047619a9",
+        "99c240e470c495ce98e6157545fce2c745b48e83",
+        "3aaf2eaf653a85c45aeec1c6dad008149ccc0e74",
+        "7d8e835f79d3bf1ab1535ec909e20dec3548268f",
+        "4ebbdd682a361a565671ef2d266cb3591a253905",
+        "f4bd6e0d210e737f5ccfc372b4913641b612b5a2",
+        "32127267b3681554a483d0e81654197e263006eb",
+        "dee3a6d39b3ad4d65d615a0636bb15595d8053d8",
+        "91749eae3263b3f4de2d1380342073cd02531b90",
+        "e85bc52b23bbd74f2a269360241a922858b3a7a5",
+        "7a8961b1ce1f6d242d861691f8161c5a2342e2d9",
+        "519fc66387a339d32f83b0c28011f94f7940b322",
+        "3b091f90ad3b1792628db8d12b765f3014b9808f",
+        "fc4071f363955c69301f5f7d14301308982bfa24",
+        "c06ba7c3c4c3dc3ba50f625c45c677fe65086a26",
+        "fc1889a605200eac04c31fb3b7081a867280540a",
+        "94e5da5eecafb2ade29bfde941c73cf55f42b320",
+        "be52b4dc494629fc6cde2337539309ec572cd552",
+        "edc1ce83dbe6ecfcc9a0bdc4e903e11c9c3adaf6",
+        "de39f3ed8fb408ea541da729aad19ea333470c34",
+        "21851047fa532c6684449292d26a42649c15afb7",
+        "d4e8d1f23adccc9466b5ab5f6fa2c67626589b03",
+        "d4de765e6bb387a2a5626749d816474d45ed11ef",
+        "7b58f19458d7948bd1f203395c02d42fce20c64e",
+        "4d87171101d2508f22cff780184e479453b3e28b",
+        "688df7d66eb909f2463069019edf51a20c3fcab4",
+        "9e57eab05d2a9572c1052734bd7a25679e6d2ccd",
+        "0810fc8b8b492464a112afb0b2fd584ea54ca811",
+        "82be890f89e7046e56831a23d9f9ad8e6ea9e366",
+        "775ae1983e812777266f81c169d455eca352a6e7",
+        "814e9197d52c0ad60ff923b78ef46eae622251ae",
+        "5480daa001b7dacdbd575f0b6fa5c44caa89ebba",
+        "446b058ae963435429c7fa34208fb03a151213fa",
+        "2d418a6cf3089b7335b8a776499f669c8e1be969",
+        "2119f4ec3b3ea370067c148e412796842536e717",
+        "1e7f7701afffcefc8dccccb102bbe39ea6562d4a",
+        "4dbd22f50138b0062b7753959f8012a887c96a32",
+        "3fbf350353af09270c266cbcf678396d2b5fdc20",
+        "f2e28eb2cb00894b42b80b2bccccb67cf55132a0",
+        "3727a5386be6e5aed379333103d474095427375e",
+        "253a13c726cd58dd6b1b6f249da7520cc0088f1b",
+        "864310074665a6d139d5665ac952a05e11c41ab6",
+        "5204ce9965607cad76dafbe6e94bc5aa0c4f8906",
+        "9b52f4326743a42b7d1f1ca5d467a09ebdb08909",
+        "f79298773fe4747cdc7c7cfc354ae55a1eaea4b3",
+        "3bef382a39b3e0d88ac74682b675b479946e5074",
+        "5f9dbc9654bcf63fee4e4b556f37c46171c3265f",
+        "0c8c9b0ae2e55c689c38395bbb06d87c0f88698c",
+        "ee538d772f6f4e1cc8966eb6dfb6b99cf21759b7",
+        "94e8c6637a7df7931041249c89ac51d110e5bda7",
+        "a9980c02ae81a292a410226c9e51af880d6c3332",
+        "5edcb0788a676cf5019d5aecae0be2a5e2530a57",
+        "befe7dec7b5fc25091d5a69bc014af441d748068",
+        "133b92c0a4bdef9456288f1b74d037b6c80476c5"
+      ],
+      "files": [],
+      "empty": true
+    },
+    {
+      "sha": "cc1d169a2aebdb239b196edaf5504710ac289a80",
+      "parent": "f9ed801507b9d6ab837f3e3446a16f4377a8c4bc",
+      "subject": "Merged PR 19720: fix: #37855 add disable condition to button and methods in FinancialParametersForm component",
+      "date": "2026-08-25T08:39:24Z",
+      "constituentCommits": [
+        "386650ff017df2e3814bda20623f8eb303260882"
+      ],
+      "files": [
+        {
+          "status": "M",
+          "path": "libs/eval-portal/admin-portal/center-admin/feature/src/lib/financial-parameters/financial-parameters-form/financial-parameters-form.component.html"
+        },
+        {
+          "status": "M",
+          "path": "libs/eval-portal/admin-portal/center-admin/feature/src/lib/financial-parameters/financial-parameters-form/financial-parameters-form.component.ts"
+        }
+      ],
+      "empty": false
+    },
+    {
+      "sha": "2f34f23ecade63b297c805a6eb19bce8f12ecbe1",
+      "parent": "cc1d169a2aebdb239b196edaf5504710ac289a80",
+      "subject": "Merged PR 19795: fix: #37883 remove redundant loading of form states in TestSelectionEffects and streamline delete method in TestSelectionService",
+      "date": "2026-09-09T05:01:32Z",
+      "constituentCommits": [
+        "7554670a175c27ef4117b185ccaddb771c35d0f5"
+      ],
+      "files": [
+        {
+          "status": "M",
+          "path": "libs/ep/academic-eval/setup/data-access/src/lib/+state/test-selection-state/test-selection.effects.ts"
+        },
+        {
+          "status": "M",
+          "path": "libs/ep/academic-eval/setup/data-access/src/lib/api-services/test-selection.service.ts"
+        }
+      ],
+      "empty": false
+    },
+    {
+      "sha": "349dcbc02362e5a4021370a6dfcea76a5f072495",
+      "parent": "2f34f23ecade63b297c805a6eb19bce8f12ecbe1",
+      "subject": "Merged PR 19798: fix: #37882 enhance input handling in digital hours forms and optimize value change subscriptions",
+      "date": "2026-09-09T07:46:40Z",
+      "constituentCommits": [
+        "0dc19f550d38e85770553a29a0a9d3b57ef9dfa7"
+      ],
+      "files": [
+        {
+          "status": "M",
+          "path": "libs/ep/academic-eval/prescribed-hours/feature/src/lib/act-digital/act-digital-hours-form/act-digital-hours-form.component.html"
+        },
+        {
+          "status": "M",
+          "path": "libs/ep/academic-eval/prescribed-hours/feature/src/lib/act-digital/act-digital-hours-form/act-digital-hours-form.component.ts"
+        },
+        {
+          "status": "M",
+          "path": "libs/ep/academic-eval/prescribed-hours/feature/src/lib/sat-digital/sat-digital-hours-form/sat-digital-hours-form.component.html"
+        },
+        {
+          "status": "M",
+          "path": "libs/ep/academic-eval/prescribed-hours/feature/src/lib/sat-digital/sat-digital-hours-form/sat-digital-hours-form.component.ts"
+        }
+      ],
+      "empty": false
+    },
+    {
+      "sha": "2bbb0d715470c59fc4144a19c5a9e858c2c96b7a",
+      "parent": "349dcbc02362e5a4021370a6dfcea76a5f072495",
+      "subject": "Merged PR 19799: fix: #37946 update service type handling in TuitionOptionsFormComponent to improve dynamic updates and filtering",
+      "date": "2026-09-09T08:54:46Z",
+      "constituentCommits": [
+        "eff831f524f0cac2d7f275be598b33ad16ab4721"
+      ],
+      "files": [
+        {
+          "status": "M",
+          "path": "libs/ep/conference/pre-prep/feature/src/lib/tuition-options/tuition-options-form/tuition-options-form.component.ts"
+        }
+      ],
+      "empty": false
+    },
+    {
+      "sha": "abc7df008574942a60ed964d16c0cba95a37c54a",
+      "parent": "2bbb0d715470c59fc4144a19c5a9e858c2c96b7a",
+      "subject": "Merged PR 19895: fix: #37946 update service type handling in TuitionOptionsFormComponent to improve filtering and selection logic",
+      "date": "2026-09-22T05:35:14Z",
+      "constituentCommits": [
+        "c1f743aaaa51f3a15e6758b68568b5fc3f6870e8"
+      ],
+      "files": [
+        {
+          "status": "M",
+          "path": "libs/ep/conference/pre-prep/feature/src/lib/tuition-options/tuition-options-form/tuition-options-form.component.html"
+        },
+        {
+          "status": "M",
+          "path": "libs/ep/conference/pre-prep/feature/src/lib/tuition-options/tuition-options-form/tuition-options-form.component.ts"
+        }
+      ],
+      "empty": false
+    },
+    {
+      "sha": "f1c8237ff2aa0afce2090c6755042aa939113db3",
+      "parent": "abc7df008574942a60ed964d16c0cba95a37c54a",
+      "subject": "Merged PR 19914: fix: #36910 update deploy condition in azure-release-pipelines.yml to include enableDevelopBranchDeploy variable",
+      "date": "2026-09-22T22:41:13Z",
+      "constituentCommits": [
+        "865bccbc5053c66e42940935cd7088fff17fb3c1"
+      ],
+      "files": [
+        {
+          "status": "M",
+          "path": "azure-release-pipelines.yml"
+        }
+      ],
+      "empty": false
+    },
+    {
+      "sha": "2c81cbde5c3bf4aac4ff1b4b801334505632bd37",
+      "parent": "f1c8237ff2aa0afce2090c6755042aa939113db3",
+      "subject": "Merged PR 19955: Branch Sync Test PR-01",
+      "date": "2026-09-30T10:53:28Z",
+      "constituentCommits": [
+        "224161a1a6451c3012d2d0b8e905fe1891f3b9a4"
+      ],
+      "files": [
+        {
+          "status": "M",
+          "path": "libs/ep/student-info/feature/src/lib/personal-info/personal-info.component.ts"
+        }
+      ],
+      "empty": false
+    }
+  ],
+  "coverage": {
+    "total": 9,
+    "assessed": 1,
+    "unprocessed": [
+      "d1be9b080be463e1a579fa239c4586c68e435582",
+      "f9ed801507b9d6ab837f3e3446a16f4377a8c4bc",
+      "cc1d169a2aebdb239b196edaf5504710ac289a80",
+      "2f34f23ecade63b297c805a6eb19bce8f12ecbe1",
+      "349dcbc02362e5a4021370a6dfcea76a5f072495",
+      "2bbb0d715470c59fc4144a19c5a9e858c2c96b7a",
+      "abc7df008574942a60ed964d16c0cba95a37c54a",
+      "f1c8237ff2aa0afce2090c6755042aa939113db3"
+    ]
+  }
+}

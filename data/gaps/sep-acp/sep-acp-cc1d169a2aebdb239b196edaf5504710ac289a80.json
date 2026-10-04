@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "id": "sep-acp-cc1d169a2aebdb239b196edaf5504710ac289a80",
+  "pairId": "sep-acp",
+  "integrationSha": "cc1d169a2aebdb239b196edaf5504710ac289a80",
+  "sourceSubject": "Merged PR 19720: fix: #37855 add disable condition to button and methods in FinancialParametersForm component",
+  "snapshotId": "17165ca4-f773-4cb7-b998-d1ace471c057",
+  "requirements": [
+    {
+      "id": "sep-acp-cc1d169a2aebdb239b196edaf5504710ac289a80-1",
+      "behavior": "Block Financial Parameters New/empty actions when form is disabled",
+      "classification": "present",
+      "rationale": "ACP already disables the New button with saved || disable and early-returns in onShowAddNew/clickEmpty when disable is set.",
+      "sourceEvidence": [
+        "cc1d169a financial-parameters-form [disabled]=saved||disable; onShowAddNew/clickEmpty if(this.disable)"
+      ],
+      "targetEvidence": [
+        "495992e center-admin/.../financial-parameters-form.component.html/.ts"
+      ],
+      "dependencies": [],
+      "featureArea": "admin-financial-parameters",
+      "groupKey": "financial-params-disable",
+      "impact": "Read-only users cannot open add/empty flows via click when disable is true."
+    }
+  ],
+  "status": "open",
+  "updatedAt": "2026-09-30T20:16:32.054Z"
+}

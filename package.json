@@ -1,0 +1,27 @@
+{
+  "name": "branch-sync-workbench",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run build -w @sync/engine && tsx watch packages/server/src/index.ts",
+    "dev:web": "npm exec --workspace @sync/web vite",
+    "build": "npm run build -w @sync/engine && npm run build -w @sync/web && npm run build -w @sync/server",
+    "start": "node packages/server/dist/index.js",
+    "cli": "npm run build -w @sync/engine && tsx packages/server/src/cli.ts",
+    "test": "vitest run --testTimeout 30000",
+    "typecheck": "npm run build -w @sync/engine && tsc --noEmit"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.3.3",
+    "@types/node": "^24.0.0",
+    "jsdom": "^29.1.1",
+    "prettier": "^3.9.9",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "vitest": "^5.0.2"
+  }
+}

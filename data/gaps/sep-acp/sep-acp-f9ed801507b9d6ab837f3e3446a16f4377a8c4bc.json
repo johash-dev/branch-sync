@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "id": "sep-acp-f9ed801507b9d6ab837f3e3446a16f4377a8c4bc",
+  "pairId": "sep-acp",
+  "integrationSha": "f9ed801507b9d6ab837f3e3446a16f4377a8c4bc",
+  "sourceSubject": "Merged PR 19670: QA to Develop Reverse Merge (08/17/2026)",
+  "snapshotId": "17165ca4-f773-4cb7-b998-d1ace471c057",
+  "requirements": [
+    {
+      "id": "sep-acp-f9ed801507b9d6ab837f3e3446a16f4377a8c4bc-1",
+      "behavior": "QA→Develop reverse merge net product delta",
+      "classification": "no_target_impact",
+      "rationale": "First-parent diff vs d1be9b08 is empty (0 files); this merge adds no unique behaviors beyond its parent tip for ACP adaptation.",
+      "sourceEvidence": [
+        "f9ed8015 first-parent diff empty vs d1be9b08"
+      ],
+      "targetEvidence": [
+        "495992e no corresponding first-parent delta to apply"
+      ],
+      "dependencies": [],
+      "featureArea": "integration",
+      "groupKey": "qa-develop-reverse-merge",
+      "impact": "No additional ACP user-facing or code change from this merge alone."
+    }
+  ],
+  "status": "open",
+  "updatedAt": "2026-09-30T20:16:32.052Z"
+}

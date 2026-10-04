@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "id": "mcp-legacy-angular21-76e933f64b3ea69c6dfd9fb5fdbc4c501961130a",
+  "pairId": "mcp-legacy-angular21",
+  "integrationSha": "76e933f64b3ea69c6dfd9fb5fdbc4c501961130a",
+  "sourceSubject": "Merged PR 19956: add console log for branch sync testing",
+  "snapshotId": "0edef09e-3352-4694-9593-064d8d54187b",
+  "requirements": [
+    {
+      "id": "mcp-legacy-angular21-76e933f64b3ea69c6dfd9fb5fdbc4c501961130a-1",
+      "behavior": "Diagnostic console message when leaving campaign details",
+      "classification": "no_target_impact",
+      "rationale": "The event only adds console.log('Branch sync test console log') after existing ngOnDestroy cleanup; all other edits are trailing commas. The frozen target's standalone ViewCampaignComponent retains the same cleanup dispatches and subscription teardown without this diagnostic message. No user-facing behavior or migration contract requires adaptation.",
+      "sourceEvidence": [
+        "76e933f64b3ea69c6dfd9fb5fdbc4c501961130a versus ce2a5904e65d3051725d9f53a59d5baa914652db: libs/mcp/franchisee-portal/feature/src/lib/view-campaign/view-campaign.component.ts, ViewCampaignComponent.ngOnDestroy",
+        "d8a14de4f0b4ac349b0d4fe1fe0b927f7225bd89: constituent commit identifies the diagnostic as branch sync testing"
+      ],
+      "targetEvidence": [
+        "a57635c4dc9bf73a0662ad8e49a9af6172493c6d: src/app/features/franchisee/view-campaign/view-campaign.component.ts, ViewCampaignComponent.ngOnDestroy preserves removeCampaignCreativeCopy, removeCampaignCreationData, setBackLink(null), and subscription teardown",
+        "a57635c4dc9bf73a0662ad8e49a9af6172493c6d: src/app/features/franchisee/franchisee.routes.ts, FRANCHISEE_ROUTES loads ViewCampaignComponent for view-campaign/:app/:id",
+        "a57635c4dc9bf73a0662ad8e49a9af6172493c6d: docs/00-rules/mcp-porting-conventions.md and docs/20-packets/F16.md specify standalone migration and campaign navigation/state parity"
+      ],
+      "dependencies": [],
+      "featureArea": "franchisee/view-campaign",
+      "groupKey": "view-campaign-destroy-sync-diagnostic",
+      "impact": "No target code change needed. The target omits a branch-sync diagnostic console line; this event adds no routing, form, API, or NgRx behavior to port."
+    }
+  ],
+  "status": "open",
+  "updatedAt": "2026-09-30T13:19:03.092Z"
+}

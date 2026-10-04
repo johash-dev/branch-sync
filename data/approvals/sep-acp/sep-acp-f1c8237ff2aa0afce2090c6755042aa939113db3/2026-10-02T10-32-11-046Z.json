@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "gapId": "sep-acp-f1c8237ff2aa0afce2090c6755042aa939113db3",
+  "planId": "27c3a08f-b995-4930-b220-26c540182817",
+  "planHash": "5892352e1f6fcb5764638001c1667b68dbe3d6d99dd44dbfe72356879633365e",
+  "sourceSha": "2c81cbde5c3bf4aac4ff1b4b801334505632bd37",
+  "targetSha": "495992ecd4e68c185c8e590dd1805a3edc54825a",
+  "knowledgeHash": "2802a8a87d3156cce7ef4395132ea16798919ef591abdddaca42828b60186e44",
+  "configHash": "79daaf4d6a1d28165cab5cc271ddb9bd9e629dcfb445271daf2f320c2c67fb14",
+  "approvedBy": "Johash",
+  "approvedAt": "2026-10-02T10:32:11.046Z"
+}

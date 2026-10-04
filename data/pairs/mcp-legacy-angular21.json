@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "id": "mcp-legacy-angular21",
+  "name": "MCP legacy → Angular 21",
+  "source": {
+    "remote": "origin",
+    "identity": "https://dev.azure.com/HuntingtonLearningCenter/Marketing%20Communications%20Program%20%28MCP%29/_git/MCP-Frontend",
+    "ref": "origin/develop"
+  },
+  "target": {
+    "remote": "origin",
+    "identity": "https://dev.azure.com/HuntingtonLearningCenter/Marketing%20Communications%20Program%20%28MCP%29/_git/MCP-Frontend",
+    "ref": "origin/replace-legacy-with-angular21"
+  },
+  "baseline": "ce2a5904e65d3051725d9f53a59d5baa914652db",
+  "rules": [
+    "Preserve /mcpapp base path, route parameters, guards, redirects, form hydration, autosave, validation, API contracts, and NgRx state ownership.",
+    "Target uses standalone Angular components, loadComponent, features/, core/, and shared/.",
+    "Documented legacy routing fixes are intentional differences; inspect current target before treating old reports as proof."
+  ],
+  "mappings": [
+    {
+      "source": "apps/mcp",
+      "target": "src/app",
+      "note": "Standalone app replaces legacy Nx remote."
+    },
+    {
+      "source": "libs/mcp/feature/src/lib",
+      "target": "src/app/features/admin",
+      "note": "Admin feature routes and components."
+    },
+    {
+      "source": "libs/mcp/franchisee-portal/feature/src/lib",
+      "target": "src/app/features/franchisee",
+      "note": "Center-scoped franchisee features."
+    },
+    {
+      "source": "libs/mcp/common/feature/src/lib",
+      "target": "src/app/features/common",
+      "note": "Public and shared pages."
+    },
+    {
+      "source": "libs/mcp/data-access/src/lib",
+      "target": "src/app/core",
+      "note": "Legacy API and state layers map across target core/api and core/state; inspect feature ownership before planning."
+    }
+  ],
+  "intentionalDifferences": [],
+  "validation": {
+    "install": { "executable": "npm", "args": ["ci"] },
+    "build": { "executable": "npm", "args": ["run", "build"] },
+    "tests": [{ "executable": "npm", "args": ["test", "--", "--watch=false"] }],
+    "manual": [
+      "Admin routing and authorization",
+      "Franchisee center URL and form behavior",
+      "Unauthorized and public routes"
+    ]
+  }
+}

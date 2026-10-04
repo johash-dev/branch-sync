@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "id": "sep-acp",
+  "name": "SEP → ACP",
+  "source": {
+    "remote": "origin",
+    "identity": "",
+    "ref": "origin/develop"
+  },
+  "target": {
+    "remote": "origin",
+    "identity": "",
+    "ref": "origin/develop-acp"
+  },
+  "baseline": "d9234c0bc10c39cd54f58c80c6493bf569c37242",
+  "rules": [
+    "Preserve supported ACP target patterns and compatibility aliases.",
+    "Check legacy behavior against current ACP; do not impose broad signal, DI, or template modernization.",
+    "The baseline predates the ACP root replacement; analyze all first-parent source events after it.",
+    "Compare deploy variables and stage conditions as behaviors even when the target pipeline file is a separate ACP pipeline. A different trigger branch does not show that a source deploy gate has no target impact."
+  ],
+  "mappings": [
+    {
+      "source": "azure-release-pipelines.yml",
+      "target": "azure-release-pipelines.yml",
+      "note": "ACP release pipeline is separate from the L1 monorepo pipeline; still compare deploy variables and stage conditions."
+    }
+  ],
+  "intentionalDifferences": [],
+  "validation": {
+    "install": {
+      "executable": "npm",
+      "args": [
+        "ci"
+      ]
+    },
+    "build": {
+      "executable": "npm",
+      "args": [
+        "run",
+        "build"
+      ]
+    },
+    "tests": [
+      {
+        "executable": "npm",
+        "args": [
+          "test",
+          "--",
+          "--watch=false"
+        ]
+      }
+    ],
+    "manual": []
+  }
+}

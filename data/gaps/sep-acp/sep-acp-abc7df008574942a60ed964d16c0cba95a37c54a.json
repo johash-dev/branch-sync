@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "id": "sep-acp-abc7df008574942a60ed964d16c0cba95a37c54a",
+  "pairId": "sep-acp",
+  "integrationSha": "abc7df008574942a60ed964d16c0cba95a37c54a",
+  "sourceSubject": "Merged PR 19895: fix: #37946 update service type handling in TuitionOptionsFormComponent to improve filtering and selection logic",
+  "snapshotId": "17165ca4-f773-4cb7-b998-d1ace471c057",
+  "requirements": [
+    {
+      "id": "sep-acp-abc7df008574942a60ed964d16c0cba95a37c54a-1",
+      "behavior": "Stabilize tuition service-type ng-select filtering, compareWith, and duplicate clearing",
+      "classification": "present",
+      "rationale": "EP tuition options already use serviceOptionsByRow, normalizeServiceTypeValue, compareServiceTypes, onServiceTypeSelected, and items/bindValue template wiring. Source only changed EP; LC form is a different legacy shape.",
+      "sourceEvidence": [
+        "abc7df00 tuition-options-form.component.ts/html serviceOptionsByRow + normalizeServiceTypeValue"
+      ],
+      "targetEvidence": [
+        "495992e features/ep/conference/pre-prep/tuition-options/form tuition-options-form.component.ts/html"
+      ],
+      "dependencies": [],
+      "featureArea": "ep-tuition-options",
+      "groupKey": "tuition-service-type-filtering",
+      "impact": "Service type dropdowns update dynamically, compare values reliably, and clear duplicate selections."
+    }
+  ],
+  "status": "open",
+  "updatedAt": "2026-09-30T20:16:32.056Z"
+}

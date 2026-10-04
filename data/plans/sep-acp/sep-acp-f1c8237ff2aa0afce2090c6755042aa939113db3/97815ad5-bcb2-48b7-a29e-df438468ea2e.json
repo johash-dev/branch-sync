@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "id": "97815ad5-bcb2-48b7-a29e-df438468ea2e",
+  "gapId": "sep-acp-f1c8237ff2aa0afce2090c6755042aa939113db3",
+  "revision": 1,
+  "createdAt": "2026-09-30T20:40:05.699Z",
+  "sourceBehavior": "At frozen source SHA 2c81cbde, azure-release-pipelines.yml defines pipeline variable enableDevelopBranchDeploy: \"false\" (comment: TEMP ACP testing / set true to restore L1 develop→dev static deploys). Stage Deploy_HLC_v2_Dev (displayName Deploy to Dev 2.0) dependsOn Build_Develop_Branch and runs only when and(succeeded('Build_Develop_Branch'), eq(variables['Build.SourceBranchName'], 'develop'), eq(variables['enableDevelopBranchDeploy'], 'true')). Integration f1c8237 introduced that variable plus the enableDevelopBranchDeploy clause on the Dev deploy condition.",
+  "targetBehavior": "At target SHA 495992e, ACP azure-release-pipelines.yml variables include only npm_config_cache. Stage Deploy_Dev (displayName Deploy to Dev CCH) dependsOn Build with condition: succeeded() only—no enableDevelopBranchDeploy variable and no equivalent kill-switch on the Dev CCH deploy stage. Trigger is already limited to develop-acp.",
+  "targetFiles": [
+    "azure-release-pipelines.yml"
+  ],
+  "approach": "Port the deploy-gate behavior into the existing ACP release pipeline without adopting L1 monorepo stage topology, MCP checkouts, EvalPortal job gates, or develop-branch build stages. (1) Under top-level variables, add enableDevelopBranchDeploy as a string flag next to npm_config_cache, with a short ACP-oriented comment that it gates Deploy_Dev. (2) Change Deploy_Dev.condition from succeeded() to and(succeeded(), eq(variables['enableDevelopBranchDeploy'], 'true'))—or and(succeeded('Build'), eq(...)) if matching named-stage style is preferred—leaving dependsOn, environment 'ACP Dev', artifact download, and stdevcchapps AzureCLI deploy steps unchanged. (3) Do not add eq(Build.SourceBranchName,'develop'); map branch gating to existing trigger include develop-acp / excludes, unless owners explicitly want a redundant branch eq for develop-acp. (4) Do not rewrite Build stage, path excludes, or introduce L1 multi-env deploy stages. Default value for enableDevelopBranchDeploy must be chosen deliberately (see questions): source default \"false\" disabled L1 Dev while ACP was the active path; blind copy would skip all ACP Dev CCH deploys until overridden.",
+  "conventions": [
+    "Preserve ACP pipeline identity: develop-acp trigger, pr: none, Deploy_Dev / Deploy_ACP_Dev / environment ACP Dev, blob deploy to stdevcchapps—not L1 Deploy_HLC_v2_* / SEP Dev / eval-portal conditions.",
+    "Keep existing ACP header comments and YAML shape (unquoted stage keys, minimal variables block); avoid broad pipeline modernization.",
+    "Use string literals \"true\"/\"false\" and eq(variables['enableDevelopBranchDeploy'], 'true') to match source Azure DevOps condition style.",
+    "Compare deploy variables and stage conditions as the behavior under test even though this file is a separate ACP pipeline from the L1 monorepo release YAML."
+  ],
+  "dependencies": [],
+  "regressionTests": [
+    "No in-repo automated tests cover azure-release-pipelines.yml; verification is YAML review plus Azure Pipelines runs.",
+    "After change, confirm variables.enableDevelopBranchDeploy is present and Deploy_Dev.condition includes eq(variables['enableDevelopBranchDeploy'], 'true') at the commit under test (git show HEAD:azure-release-pipelines.yml).",
+    "Confirm Build stage and deploy job steps are otherwise unchanged (no accidental L1 stage/resource imports)."
+  ],
+  "commands": [
+    {
+      "executable": "git",
+      "args": [
+        "show",
+        "495992ecd4e68c185c8e590dd1805a3edc54825a:azure-release-pipelines.yml"
+      ]
+    },
+    {
+      "executable": "git",
+      "args": [
+        "show",
+        "2c81cbde5c3bf4aac4ff1b4b801334505632bd37:azure-release-pipelines.yml"
+      ]
+    },
+    {
+      "executable": "git",
+      "args": [
+        "diff",
+        "--",
+        "azure-release-pipelines.yml"
+      ]
+    }
+  ],
+  "manualScenarios": [
+    "Pipeline run on develop-acp with enableDevelopBranchDeploy set to true (YAML default or queue-time override): Build succeeds → Deploy_Dev runs and updates stdevcchapps $web.",
+    "Same branch with enableDevelopBranchDeploy set to false: Build succeeds → Deploy_Dev is skipped (stage condition fails); no blob delete-batch/upload-batch.",
+    "Optional: queue-time override opposite of YAML default in Azure DevOps to prove the variable acts as a kill-switch without editing the file.",
+    "Confirm a failed Build still prevents Deploy_Dev (succeeded() / succeeded('Build') remains part of the condition)."
+  ],
+  "questions": [
+    "Should enableDevelopBranchDeploy default to \"true\" so current develop-acp → Dev CCH deploys keep working, or \"false\" for literal parity with source (which would pause ACP Dev deploys until flipped)?",
+    "Should Deploy_Dev.condition also require eq(variables['Build.SourceBranchName'], 'develop-acp'), or is the existing trigger-only branch filter sufficient?",
+    "Who owns the intended default and any Azure DevOps library/UI variable overrides for this flag on the ACP-Frontend pipeline?"
+  ],
+  "hash": "2252471bec1a91c1189049928e6da9e67b1efce5f18897cb6e79fe12e687e86d"
+}

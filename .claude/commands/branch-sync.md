@@ -1,0 +1,1 @@
+Use the shared Branch Sync Workbench commands through `npm run cli -- <command>` from the toolkit root. Read `.agents/skills/branch-sync/SKILL.md` first. Keep the backend running with `npm start`. Do not bypass its approval, validation, review, or integration gates.

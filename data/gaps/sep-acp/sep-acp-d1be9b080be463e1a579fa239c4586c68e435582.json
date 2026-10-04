@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "id": "sep-acp-d1be9b080be463e1a579fa239c4586c68e435582",
+  "pairId": "sep-acp",
+  "integrationSha": "d1be9b080be463e1a579fa239c4586c68e435582",
+  "sourceSubject": "Merged PR 19655: fix: #37855 improve user center sorting and enhance form handling in GratefulParents components",
+  "snapshotId": "17165ca4-f773-4cb7-b998-d1ace471c057",
+  "requirements": [
+    {
+      "id": "sep-acp-d1be9b080be463e1a579fa239c4586c68e435582-1",
+      "behavior": "Sort user centers with Center User last and alphabetical center names",
+      "classification": "present",
+      "rationale": "ACP AuthService already applies the same centerRole-disabled-last then localeCompare sort after building userCenters.",
+      "sourceEvidence": [
+        "d1be9b08 apps/eval-portal/.../auth.service.ts userCenters.sort (center user last + localeCompare)"
+      ],
+      "targetEvidence": [
+        "495992e src/app/core/auth/auth.service.ts userCenters.sort"
+      ],
+      "dependencies": [],
+      "featureArea": "auth",
+      "groupKey": "user-center-alpha-sort",
+      "impact": "Center switcher lists admin/owner centers first, alphabetically, with Center User entries last."
+    },
+    {
+      "id": "sep-acp-d1be9b080be463e1a579fa239c4586c68e435582-2",
+      "behavior": "Land center-admin redirect on first non-center_user center by name",
+      "classification": "present",
+      "rationale": "ACP canActivateGenericAdmin already filters out center_user and sorts by centerName before picking firstCenter.",
+      "sourceEvidence": [
+        "d1be9b08 apps/eval-portal/.../can-load.ts firstCenter filter+sort localeCompare"
+      ],
+      "targetEvidence": [
+        "495992e src/app/core/auth/can-load.ts firstCenter filter+sort"
+      ],
+      "dependencies": [],
+      "featureArea": "auth",
+      "groupKey": "user-center-alpha-sort",
+      "impact": "Users without a center in the URL land on a deterministic admin center instead of whoami/DB order."
+    },
+    {
+      "id": "sep-acp-d1be9b080be463e1a579fa239c4586c68e435582-3",
+      "behavior": "Grateful Parents edit mode reseeds form and treats Jodit content dirty as unsaved",
+      "classification": "present",
+      "rationale": "Center-admin ACT/SAT/LC Grateful Parents forms already patch on enableEditMode and gate save dialog on form.dirty || isContentDirty; global-admin copies were unchanged in source too.",
+      "sourceEvidence": [
+        "d1be9b08 grateful-parents-*-form enableEditMode patchValue; onShowSaveDialog isContentDirty"
+      ],
+      "targetEvidence": [
+        "495992e features/admin/center-admin/grateful-parents/*/form enableEditMode + onShowSaveDialog"
+      ],
+      "dependencies": [],
+      "featureArea": "admin-grateful-parents",
+      "groupKey": "grateful-parents-edit-dirty",
+      "impact": "Entering edit restores editor content; Cancel/Save respects rich-text edits that never mark the FormGroup dirty."
+    },
+    {
+      "id": "sep-acp-d1be9b080be463e1a579fa239c4586c68e435582-4",
+      "behavior": "Ignore Jodit initial echo and emit value changes inside NgZone",
+      "classification": "present",
+      "rationale": "Shared ACP jodit editor already normalizes HTML on first change and runs valueChange via NgZone.",
+      "sourceEvidence": [
+        "d1be9b08 libs/.../jodit-editor.component.ts normalizeHtml + ngZone.run"
+      ],
+      "targetEvidence": [
+        "495992e src/app/shared/ui/jodit-editor/jodit-editor.component.ts onValueChange/normalizeHtml"
+      ],
+      "dependencies": [],
+      "featureArea": "admin-ui",
+      "groupKey": "jodit-initial-echo",
+      "impact": "Rich-text forms no longer start dirty from editor bootstrap; change detection still runs for edits."
+    }
+  ],
+  "status": "open",
+  "updatedAt": "2026-09-30T20:16:32.051Z"
+}

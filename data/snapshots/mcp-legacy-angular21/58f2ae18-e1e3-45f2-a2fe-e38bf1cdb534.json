@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "id": "58f2ae18-e1e3-45f2-a2fe-e38bf1cdb534",
+  "pairId": "mcp-legacy-angular21",
+  "createdAt": "2026-09-30T07:59:37.018Z",
+  "sourceSha": "ce2a5904e65d3051725d9f53a59d5baa914652db",
+  "targetSha": "a57635c4dc9bf73a0662ad8e49a9af6172493c6d",
+  "baselineSha": "ce2a5904e65d3051725d9f53a59d5baa914652db",
+  "fetchedAt": null,
+  "offline": true,
+  "knowledgeHash": "8863ec8fdcf98af06b3bcde9e260556bbf06a9a830b95d4964d98ad2714ee12b",
+  "configHash": "6bf60250e0eff29d85fe5fd9ce655d739a01aad9b9614e9ac9dbf0302744fac5",
+  "events": [],
+  "coverage": {
+    "total": 0,
+    "assessed": 0,
+    "unprocessed": []
+  }
+}

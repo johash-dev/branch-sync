@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "id": "sep-acp-2f34f23ecade63b297c805a6eb19bce8f12ecbe1",
+  "pairId": "sep-acp",
+  "integrationSha": "2f34f23ecade63b297c805a6eb19bce8f12ecbe1",
+  "sourceSubject": "Merged PR 19795: fix: #37883 remove redundant loading of form states in TestSelectionEffects and streamline delete method in TestSelectionService",
+  "snapshotId": "17165ca4-f773-4cb7-b998-d1ace471c057",
+  "requirements": [
+    {
+      "id": "sep-acp-2f34f23ecade63b297c805a6eb19bce8f12ecbe1-1",
+      "behavior": "Stop reloading form states after test-selection delete",
+      "classification": "present",
+      "rationale": "EP remove/remove-multiple effects already end at resetConcludingConversationState without loadFormStates.",
+      "sourceEvidence": [
+        "2f34f23e test-selection.effects.ts remove paths drop loadFormStates"
+      ],
+      "targetEvidence": [
+        "495992e features/ep/.../test-selection.effects.ts removeTestSuccess/removeMultiple paths"
+      ],
+      "dependencies": [],
+      "featureArea": "ep-test-selection",
+      "groupKey": "test-selection-delete-effects",
+      "impact": "Deleting tests no longer triggers redundant form-state reloads."
+    },
+    {
+      "id": "sep-acp-2f34f23ecade63b297c805a6eb19bce8f12ecbe1-2",
+      "behavior": "Parse EpTestSetup DELETE as text response",
+      "classification": "present",
+      "rationale": "EP TestSelectionService.remove already uses responseType text on /api/sep/EpTestSetup.",
+      "sourceEvidence": [
+        "2f34f23e test-selection.service.ts remove responseType:'text'"
+      ],
+      "targetEvidence": [
+        "495992e src/app/core/api/ep/.../test-selection.service.ts remove"
+      ],
+      "dependencies": [],
+      "featureArea": "ep-test-selection",
+      "groupKey": "test-selection-delete-http",
+      "impact": "Empty/non-JSON delete responses no longer break the remove observable."
+    }
+  ],
+  "status": "open",
+  "updatedAt": "2026-09-30T20:16:32.054Z"
+}

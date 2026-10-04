@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "id": "sep-acp-2c81cbde5c3bf4aac4ff1b4b801334505632bd37",
+  "pairId": "sep-acp",
+  "integrationSha": "2c81cbde5c3bf4aac4ff1b4b801334505632bd37",
+  "sourceSubject": "Merged PR 19955: Branch Sync Test PR-01",
+  "snapshotId": "17165ca4-f773-4cb7-b998-d1ace471c057",
+  "requirements": [
+    {
+      "id": "sep-acp-2c81cbde5c3bf4aac4ff1b4b801334505632bd37-1",
+      "behavior": "Branch-sync test console.log in PersonalInfo destroy",
+      "classification": "no_target_impact",
+      "rationale": "Source only adds a temporary console.log probe plus formatting commas; ACP correctly omits the probe and no product behavior needs adaptation.",
+      "sourceEvidence": [
+        "2c81cbde personal-info.component.ts ngOnDestroy console.log('Test line for branch sync testing')"
+      ],
+      "targetEvidence": [
+        "495992e features/ep/student-info/personal-info/personal-info.component.ts no sync console.log"
+      ],
+      "dependencies": [],
+      "featureArea": "ep-student-info",
+      "groupKey": "branch-sync-probe",
+      "impact": "No user-facing ACP change; do not port the test logging."
+    }
+  ],
+  "status": "open",
+  "updatedAt": "2026-09-30T20:16:32.057Z"
+}

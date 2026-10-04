@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "id": "sep-acp-349dcbc02362e5a4021370a6dfcea76a5f072495",
+  "pairId": "sep-acp",
+  "integrationSha": "349dcbc02362e5a4021370a6dfcea76a5f072495",
+  "sourceSubject": "Merged PR 19798: fix: #37882 enhance input handling in digital hours forms and optimize value change subscriptions",
+  "snapshotId": "17165ca4-f773-4cb7-b998-d1ace471c057",
+  "requirements": [
+    {
+      "id": "sep-acp-349dcbc02362e5a4021370a6dfcea76a5f072495-1",
+      "behavior": "Debounce prescribed-hours edits via input handler and guard stacked modals",
+      "classification": "present",
+      "rationale": "ACT and SAT digital hours forms already use onPrescribedInput/onChangeValue timeouts, committed-value short-circuit, hasOpenModals guards, and confirmedValue setValue(emitEvent:false).",
+      "sourceEvidence": [
+        "349dcbc0 act/sat-digital-hours-form onPrescribedInput, timeoutId, hasOpenModals, confirmedValue"
+      ],
+      "targetEvidence": [
+        "495992e features/ep/.../act-digital and sat-digital hours-form + (input) bindings"
+      ],
+      "dependencies": [],
+      "featureArea": "ep-prescribed-hours",
+      "groupKey": "digital-hours-input-handling",
+      "impact": "Prescribed hour edits debounce correctly and avoid duplicate confirmation modals."
+    }
+  ],
+  "status": "open",
+  "updatedAt": "2026-09-30T20:16:32.055Z"
+}

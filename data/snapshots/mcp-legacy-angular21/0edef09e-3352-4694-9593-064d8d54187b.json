@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "id": "0edef09e-3352-4694-9593-064d8d54187b",
+  "pairId": "mcp-legacy-angular21",
+  "createdAt": "2026-09-30T13:18:03.661Z",
+  "sourceSha": "76e933f64b3ea69c6dfd9fb5fdbc4c501961130a",
+  "targetSha": "a57635c4dc9bf73a0662ad8e49a9af6172493c6d",
+  "baselineSha": "ce2a5904e65d3051725d9f53a59d5baa914652db",
+  "fetchedAt": "2026-09-30T13:18:03.661Z",
+  "offline": false,
+  "knowledgeHash": "8863ec8fdcf98af06b3bcde9e260556bbf06a9a830b95d4964d98ad2714ee12b",
+  "configHash": "6bf60250e0eff29d85fe5fd9ce655d739a01aad9b9614e9ac9dbf0302744fac5",
+  "events": [
+    {
+      "sha": "76e933f64b3ea69c6dfd9fb5fdbc4c501961130a",
+      "parent": "ce2a5904e65d3051725d9f53a59d5baa914652db",
+      "subject": "Merged PR 19956: add console log for branch sync testing",
+      "date": "2026-09-30T13:17:48Z",
+      "constituentCommits": [
+        "d8a14de4f0b4ac349b0d4fe1fe0b927f7225bd89"
+      ],
+      "files": [
+        {
+          "status": "M",
+          "path": "libs/mcp/franchisee-portal/feature/src/lib/view-campaign/view-campaign.component.ts"
+        }
+      ],
+      "empty": false
+    }
+  ],
+  "coverage": {
+    "total": 1,
+    "assessed": 1,
+    "unprocessed": []
+  },
+  "aiAssessedAt": "2026-09-30T13:19:03.093Z"
+}

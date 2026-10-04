@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "id": "sep-acp-f1c8237ff2aa0afce2090c6755042aa939113db3",
+  "pairId": "sep-acp",
+  "integrationSha": "f1c8237ff2aa0afce2090c6755042aa939113db3",
+  "sourceSubject": "Merged PR 19914: fix: #36910 update deploy condition in azure-release-pipelines.yml to include enableDevelopBranchDeploy variable",
+  "snapshotId": "17165ca4-f773-4cb7-b998-d1ace471c057",
+  "requirements": [
+    {
+      "id": "sep-acp-f1c8237ff2aa0afce2090c6755042aa939113db3-1",
+      "behavior": "Gate Dev deploy behind enableDevelopBranchDeploy variable",
+      "classification": "missing",
+      "rationale": "Mapped ACP azure-release-pipelines.yml has neither enableDevelopBranchDeploy nor the gated develop Dev condition; Deploy_Dev uses unconditional succeeded(). A different trigger branch does not remove the need to assess this deploy gate.",
+      "sourceEvidence": [
+        "f1c8237f azure-release-pipelines.yml enableDevelopBranchDeploy:\"false\"; Deploy to Dev 2.0 condition includes eq(variables['enableDevelopBranchDeploy'],'true')"
+      ],
+      "targetEvidence": [
+        "495992e azure-release-pipelines.yml variables lack enableDevelopBranchDeploy; Deploy_Dev condition: succeeded() only"
+      ],
+      "dependencies": [],
+      "featureArea": "ci-cd",
+      "groupKey": "develop-deploy-gate",
+      "impact": "ACP Dev CCH deploys have no equivalent kill-switch variable/condition matching the source deploy gate."
+    }
+  ],
+  "status": "verified_local",
+  "updatedAt": "2026-10-04T12:23:33.868Z"
+}
