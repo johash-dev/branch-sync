@@ -19,6 +19,7 @@ import {
   completeDiff,
 } from "@sync/engine";
 import { Jobs } from "./jobs.js";
+import { openWorktree } from "./editor.js";
 import { registerSetup } from "./setup.js";
 import {
   applyAssessment,
@@ -657,6 +658,24 @@ export function createApp(
         },
       );
       return { jobId: job.id };
+    },
+  );
+  app.post<{ Params: { pairId: string; gapId: string } }>(
+    "/api/pairs/:pairId/gaps/:gapId/open-worktree",
+    async (req) => {
+      const parsed = z
+        .object({ editor: z.enum(["cursor", "code"]) })
+        .strict()
+        .safeParse(req.body);
+      if (!parsed.success)
+        throw new Error("Choose Cursor or VS Code to open the worktree.");
+      const run = await store.latestRun(req.params.pairId, req.params.gapId);
+      if (!run) throw new Error("No worktree yet. Start implementation first.");
+      if (!existsSync(run.worktree))
+        throw new Error(
+          "Worktree folder is missing. Retry implementation to recreate it.",
+        );
+      return openWorktree(parsed.data.editor, run.worktree);
     },
   );
   app.post<{ Params: { pairId: string; gapId: string } }>(

@@ -24,7 +24,32 @@ const requirement = {
   impact: "No target change",
 };
 
-function payload(status = "open", classification = "present") {
+const savedPlan = {
+  id: "plan-1",
+  sourceBehavior: "Source gates deploys",
+  targetBehavior: "Target should gate deploys",
+  targetFiles: ["azure-release-pipelines.yml"],
+  approach: "Add the variable",
+  conventions: [],
+  dependencies: [],
+  regressionTests: ["Review the YAML"],
+  commands: [],
+  manualScenarios: [],
+  questions: [],
+};
+
+function payload(
+  status = "open",
+  classification = "present",
+  run?: {
+    stage: string;
+    status: string;
+    worktree: string;
+    branch: string;
+    checks: [];
+    manualResults: [];
+  },
+) {
   return {
     gap: {
       id: "gap-1",
@@ -35,26 +60,41 @@ function payload(status = "open", classification = "present") {
       updatedAt: "now",
       requirements: [{ ...requirement, classification }],
     },
-    plan:
-      status === "planned"
-        ? {
-            id: "plan-1",
-            sourceBehavior: "Source gates deploys",
-            targetBehavior: "Target should gate deploys",
-            targetFiles: ["azure-release-pipelines.yml"],
-            approach: "Add the variable",
-            conventions: [],
-            dependencies: [],
-            regressionTests: ["Review the YAML"],
-            commands: [],
-            manualScenarios: [],
-            questions: [],
-          }
-        : undefined,
+    plan: status === "open" ? undefined : savedPlan,
+    run,
     relatedGaps: [],
     sourceRepository: "",
     sourceEvents: [],
   };
+}
+
+const worktreeRun = {
+  stage: "implementing",
+  status: "Worktree ready",
+  worktree: "C:\\wt\\sep-gap",
+  branch: "codex/sync-sep",
+  checks: [] as [],
+  manualResults: [] as [],
+};
+
+function workspaceApi(
+  body: ReturnType<typeof payload>,
+  onOpen?: (request: unknown) => Promise<unknown>,
+) {
+  vi.mocked(api).mockImplementation(async (url, method, request) => {
+    if (url === "/health") return { pairs: [], jobs: [] };
+    if (url === "/pairs")
+      return {
+        pairs: [{ id: "sep", name: "SEP" }],
+        binding: { defaultProvider: "cursor", pairs: {} },
+      };
+    if (url === "/providers") return [{ provider: "cursor", available: true }];
+    if (method === "POST" && url === "/pairs/sep/gaps/gap-1/open-worktree")
+      return onOpen?.(request);
+    if (String(url).endsWith("/diff")) return { diff: "" };
+    if (String(url).startsWith("/pairs/sep/gaps/gap-1")) return body;
+    throw new Error(`Unexpected ${url}`);
+  });
 }
 
 beforeEach(() => {
@@ -133,5 +173,113 @@ describe("gap workspace", () => {
     expect(confirm).toHaveBeenCalled();
     expect(screen.getByDisplayValue("Edited rationale")).toBeTruthy();
     confirm.mockRestore();
+  });
+
+  it("shows progress labels and keeps the current step distinct from the open stage", async () => {
+    workspaceApi(payload("approved"));
+    mount("/pairs/sep/gaps/gap-1");
+    expect(
+      await screen.findByRole("button", {
+        name: "Selected stage. Step 4. Implement. Current",
+      }),
+    ).toBeTruthy();
+    for (const name of [
+      "Step 1. Evidence. Done",
+      "Step 2. Plan. Done",
+      "Step 3. Approve. Done",
+      "Step 5. Validate. Locked",
+      "Step 6. Review. Locked",
+    ])
+      expect(screen.getByRole("button", { name })).toBeTruthy();
+    expect(
+      screen
+        .getByRole("button", { name: "Selected stage. Step 4. Implement. Current" })
+        .getAttribute("aria-current"),
+    ).toBe("step");
+
+    fireEvent.click(screen.getByRole("button", { name: "Step 1. Evidence. Done" }));
+    expect(
+      screen.getByRole("button", {
+        name: "Selected stage. Step 1. Evidence. Done",
+      }),
+    ).toBeTruthy();
+    const current = screen.getByRole("button", {
+      name: "Step 4. Implement. Current",
+    });
+    expect(current.getAttribute("aria-current")).toBe("step");
+    expect(current.className).not.toContain("active");
+
+    fireEvent.click(screen.getByRole("button", { name: "Step 5. Validate. Locked" }));
+    expect(
+      screen.getByText("Finish implementation before validation."),
+    ).toBeTruthy();
+    expect(
+      screen
+        .getByRole("button", {
+          name: "Selected stage. Step 5. Validate. Locked",
+        })
+        .getAttribute("aria-describedby"),
+    ).toBe("stage-blocker-validate");
+  });
+
+  it("opens the stored worktree in Cursor or VS Code from one click", async () => {
+    let request: unknown;
+    let release: (value: unknown) => void = () => {};
+    const gate = new Promise((resolve) => {
+      release = resolve;
+    });
+    workspaceApi(payload("implementing", "missing", worktreeRun), async (body) => {
+      request = body;
+      await gate;
+      return { opened: true };
+    });
+    mount("/pairs/sep/gaps/gap-1?stage=implement");
+    expect(await screen.findByText("C:\\wt\\sep-gap")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Open in Cursor" }));
+    expect(
+      (await screen.findByRole("button", { name: "Opening Cursor…" })).hasAttribute(
+        "disabled",
+      ),
+    ).toBe(true);
+    expect(
+      (
+        screen.getByRole("button", { name: "Open in VS Code" }) as HTMLButtonElement
+      ).disabled,
+    ).toBe(true);
+    release({});
+    expect(await screen.findByText("Opened the worktree in Cursor.")).toBeTruthy();
+    expect(request).toEqual({ editor: "cursor" });
+    expect(screen.getByText("C:\\wt\\sep-gap")).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "Open in VS Code" }));
+    expect(await screen.findByText("Opened the worktree in VS Code.")).toBeTruthy();
+    expect(request).toEqual({ editor: "code" });
+  });
+
+  it("keeps the worktree path visible when an editor cannot open", async () => {
+    workspaceApi(payload("verified_local", "missing", worktreeRun), async () => {
+      throw new Error(
+        "Could not find VS Code on this machine. Install Visual Studio Code, then try Open in VS Code again.",
+      );
+    });
+    mount("/pairs/sep/gaps/gap-1?stage=review");
+    expect(
+      await screen.findByRole("heading", { name: "Commit, push, and merge" }),
+    ).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Open in VS Code" }));
+    expect(
+      (await screen.findAllByText(/Could not find VS Code/)).length,
+    ).toBeGreaterThan(0);
+    expect(screen.getByText("C:\\wt\\sep-gap")).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Open in Cursor" })).toBeTruthy();
+  });
+
+  it("hides editor launch until a worktree exists", async () => {
+    mount("/pairs/sep/gaps/gap-1?stage=implement");
+    expect(
+      await screen.findByRole("heading", { name: "Implementation & diff" }),
+    ).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Open in Cursor" })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Open in VS Code" })).toBeNull();
   });
 });

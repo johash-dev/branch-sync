@@ -119,7 +119,7 @@ const approve = () =>
   screen.getByRole("button", { name: "Approve saved plan" }) as HTMLButtonElement;
 
 const rail = (label: string) =>
-  screen.getByRole("button", { name: new RegExp(`\\d\\s+${label}\\b`) });
+  screen.getByRole("button", { name: new RegExp(`Step \\d+\\. ${label}\\.`) });
 
 describe("plan question answers", () => {
   it("enables approval only after every saved question has an answer", async () => {

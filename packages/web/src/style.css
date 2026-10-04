@@ -1377,26 +1377,78 @@ textarea:focus-visible {
 }
 .stage-rail button {
   display: flex;
-  gap: 9px;
+  gap: 10px;
   justify-content: flex-start;
   align-items: center;
   background: transparent;
-  color: var(--muted);
+  color: var(--ink);
   border: 0;
   border-bottom: 2px solid transparent;
   border-radius: 0;
-  padding: 13px 10px;
+  padding: 12px 10px;
   font-size: 0.78rem;
   min-width: 0;
+  white-space: normal;
+  text-align: left;
+}
+.stage-mark {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--muted);
+}
+.stage-rail button.complete .stage-mark {
+  background: var(--success-soft);
+  border-color: transparent;
+  color: var(--success);
+}
+.stage-rail button.current .stage-mark {
+  background: var(--accent);
+  border-color: transparent;
+  color: #fff;
+}
+.stage-rail button.available .stage-mark {
+  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--accent);
+}
+.stage-rail button.blocked .stage-mark {
+  background: var(--surface-subtle);
+  color: var(--muted);
+}
+.stage-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  min-width: 0;
+}
+.stage-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
 }
 .stage-state {
-  margin-left: auto;
+  margin-left: 0;
   font-size: 0.68rem;
-  text-transform: capitalize;
+  font-weight: 600;
+  line-height: 1.2;
 }
-.stage-rail button.active .stage-state,
-.stage-rail button .stage-state.current {
+.stage-rail button.complete .stage-state {
+  color: var(--success);
+}
+.stage-rail button.current .stage-state,
+.stage-rail button.available .stage-state {
   color: var(--accent);
+}
+.stage-rail button.blocked .stage-label,
+.stage-rail button.blocked .stage-state {
+  color: var(--muted);
 }
 .stage-blocker,
 .unsaved {
@@ -1407,14 +1459,13 @@ textarea:focus-visible {
 .stage-rail button:hover {
   background: #edeff2;
 }
-.stage-rail button.active {
+.stage-rail button.active,
+.stage-rail button.active:hover {
   background: var(--accent-soft);
   border-bottom-color: var(--accent);
-  color: var(--accent);
 }
-.stage-number {
-  font-family: var(--mono);
-  font-size: 0.73rem;
+.stage-rail button.active .stage-label {
+  color: var(--accent);
 }
 .section-panel {
   margin: 0;
@@ -1489,11 +1540,28 @@ textarea:focus-visible {
   padding: 18px;
   margin: 18px 0;
 }
-.run-summary div {
+.run-summary > div {
   display: grid;
   grid-template-columns: 95px minmax(0, 1fr);
   gap: 12px;
   font-size: 0.8rem;
+}
+.worktree-entry > div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+.worktree-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.worktree-actions p {
+  flex-basis: 100%;
+  margin: 0;
 }
 .run-summary span {
   color: var(--muted);
@@ -1943,9 +2011,9 @@ textarea:focus-visible {
   }
   .stage-rail button {
     flex: 0 0 auto;
-    min-width: 7.5rem;
-    gap: 6px;
-    padding-inline: 10px;
+    min-width: 8.75rem;
+    gap: 8px;
+    padding-inline: 12px;
     font-size: 0.78rem;
   }
   .continue-item {
@@ -2160,7 +2228,7 @@ textarea:focus-visible {
   .approval-controls button {
     margin-top: 10px;
   }
-  .run-summary div {
+  .run-summary > div {
     grid-template-columns: 1fr;
     gap: 4px;
   }

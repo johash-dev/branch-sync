@@ -1,4 +1,13 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
+
+const openWorktree = vi.hoisted(() =>
+  vi.fn(async (editor: string, worktree: string) => ({
+    opened: true,
+    editor,
+    worktree,
+  })),
+);
+vi.mock("../packages/server/src/editor.js", () => ({ openWorktree }));
 import { mkdtemp, mkdir, writeFile, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -307,6 +316,89 @@ describe("Local API and job recovery", () => {
       expect(JSON.stringify(normalized)).not.toContain("session/update");
     } finally {
       await app.close();
+    }
+  });
+});
+
+describe("worktree editor launch", () => {
+  const run = (worktree: string) => ({
+    version: 1 as const,
+    id: "run-1",
+    gapId: "gap-1",
+    stage: "implementing" as const,
+    status: "Worktree ready",
+    worktree,
+    branch: "codex/sync-pair",
+    baseSha: "a".repeat(40),
+    checks: [],
+    manualResults: [],
+    createdAt: "2026-10-04T00:00:00.000Z",
+    updatedAt: "2026-10-04T00:00:00.000Z",
+  });
+
+  async function workbench() {
+    const root = await mkdtemp(path.join(tmpdir(), "sync editor "));
+    const { app, store } = createApp(root);
+    const token = (await app.inject("/api/session")).json().token;
+    const post = (
+      payload: Record<string, unknown>,
+      headers: Record<string, string> = { "x-sync-token": token },
+    ) =>
+      app.inject({
+        method: "POST",
+        url: "/api/pairs/pair/gaps/gap-1/open-worktree",
+        headers,
+        payload,
+      });
+    return { root, app, store, post };
+  }
+
+  it("requires the local session and opens only the stored worktree", async () => {
+    const f = await workbench();
+    const worktree = await mkdtemp(path.join(f.root, "wt-"));
+    await f.store.saveRun("pair", run(worktree));
+    openWorktree.mockClear();
+    try {
+      const missingToken = await f.post({ editor: "cursor" }, {});
+      expect(missingToken.statusCode).toBe(403);
+      expect(openWorktree).not.toHaveBeenCalled();
+
+      const invalid = await f.post({ editor: "vim" });
+      expect(invalid.statusCode).toBe(400);
+      expect(invalid.json().error).toMatch(/Cursor or VS Code/);
+      const suppliedPath = await f.post({
+        editor: "cursor",
+        path: "C:\\outside",
+      });
+      expect(suppliedPath.statusCode).toBe(400);
+      expect(openWorktree).not.toHaveBeenCalled();
+
+      for (const editor of ["cursor", "code"] as const) {
+        const opened = await f.post({ editor });
+        expect(opened.statusCode).toBe(200);
+        expect(opened.json()).toMatchObject({ opened: true, editor, worktree });
+        expect(openWorktree).toHaveBeenLastCalledWith(editor, worktree);
+      }
+    } finally {
+      await f.app.close();
+    }
+  });
+
+  it("stops when the gap has no stored worktree or the folder is gone", async () => {
+    const f = await workbench();
+    openWorktree.mockClear();
+    try {
+      const missingRun = await f.post({ editor: "cursor" });
+      expect(missingRun.statusCode).toBe(400);
+      expect(missingRun.json().error).toMatch(/No worktree yet/);
+
+      await f.store.saveRun("pair", run(path.join(f.root, "missing-worktree")));
+      const missingFolder = await f.post({ editor: "code" });
+      expect(missingFolder.statusCode).toBe(400);
+      expect(missingFolder.json().error).toMatch(/Worktree folder is missing/);
+      expect(openWorktree).not.toHaveBeenCalled();
+    } finally {
+      await f.app.close();
     }
   });
 });

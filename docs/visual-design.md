@@ -23,7 +23,7 @@ A precise, understated engineering workbench: graphite navigation, warm neutral 
 
 Keep normal controls around 38–40px tall, and 44px on coarse pointers. Field labels stay legible, corners stay modest, and action emphasis stays proportional to consequence. Use `Icon.tsx` for consistent decorative line icons, with visible text or an accessible label on the surrounding control. Preserve native form controls and their existing handlers. One strong focus ring is shared. Shadows stay on overlays.
 
-The gap workspace is a decision header, a Next Action strip, and a six-stage rail: Evidence, Plan, Approve, Implement, Validate, Review. Evidence is one editable surface for the decision, rationale, and source/target evidence; source history stays in a secondary disclosure. Plan groups Behavior, Scope, Verification, and Questions, and approval is a separate immutable summary of the saved revision. Each stage exposes complete, current, available, or blocked as text, not color alone. The visible stage keeps one primary action. Wide screens use a horizontal rail. At 900px and below the rail scrolls horizontally and keeps its labels. At 1180px navigation and page gutters tighten; at 900px pairs stack; at 740px navigation becomes a labeled top bar and forms stack; at 600px setup paths stack. The page uses `min-height: 100dvh`. Mobile fields use 16px text. A skip-to-content link remains.
+The gap workspace is a decision header, a Next Action strip, and a six-stage rail: Evidence, Plan, Approve, Implement, Validate, Review. Evidence is one editable surface for the decision, rationale, and source/target evidence; source history stays in a secondary disclosure. Plan groups Behavior, Scope, Verification, and Questions, and approval is a separate immutable summary of the saved revision. Each stage shows Done, Current, Available, or Locked with a check, current point, open mark, or lock, so the word and marker carry the status together. The open stage has the underline and says "Selected stage"; the workflow’s current step keeps `aria-current="step"` when another stage is open. A blocked stage stays inspectable and explains its blocker. When a worktree exists, Changes and Git handoff offer one-click Open in Cursor and Open in VS Code beside the path. The visible stage keeps one primary action. Wide screens use a horizontal rail. At 900px and below the rail scrolls horizontally and keeps its labels. At 1180px navigation and page gutters tighten; at 900px pairs stack; at 740px navigation becomes a labeled top bar and forms stack; at 600px setup paths stack. The page uses `min-height: 100dvh`. Mobile fields use 16px text. A skip-to-content link remains.
 
 ## Motion
 
@@ -40,7 +40,7 @@ Rejected: animated route or stage changes, staggered record or diff entrances, a
 
 | State | How it is shown |
 | --- | --- |
-| Stage complete, current, available, blocked | Text on the stage control, with `aria-current="step"` on the current stage |
+| Stage complete, current, available, blocked | Done, Current, Available, or Locked, plus a matching marker. `aria-current="step"` stays on the current step; the open stage is labeled "Selected stage" |
 | Unsaved Evidence or Plan | Visible “Unsaved changes” and a confirmation before leaving |
 | Validation passed, failed, non-blocking, pending, running | Checklist text, not color alone |
 | Job connected, reconnecting, cancelled, interrupted, failed | Distinct sentences in Activity |

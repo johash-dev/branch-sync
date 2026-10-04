@@ -11,7 +11,9 @@ import {
   unansweredPlanQuestions,
   workflowStages,
   type StageId,
+  type StageState,
 } from "./guidance.js";
+import { Icon } from "./Icon.js";
 import {
   EmptyState,
   ErrorMessage,
@@ -54,6 +56,18 @@ const stages: StageId[] = [
   "validate",
   "review",
 ];
+const stageStatusLabel: Record<StageState, string> = {
+  complete: "Done",
+  current: "Current",
+  available: "Available",
+  blocked: "Locked",
+};
+const stageMark: Record<StageState, "check" | "dot" | "circle" | "lock"> = {
+  complete: "check",
+  current: "dot",
+  available: "circle",
+  blocked: "lock",
+};
 const reviewerKey = "branch-sync-reviewer";
 const list = (value: string) => value.split("\n");
 const clean = (value: string[]) =>
@@ -781,6 +795,67 @@ function PlanSection({
   );
 }
 
+function WorktreeActions({ base }: { base: string }) {
+  const { notify } = useWorkspace();
+  const [pending, setPending] = useState<"cursor" | "code" | "">("");
+  const [failure, setFailure] = useState("");
+  const open = async (editor: "cursor" | "code") => {
+    setPending(editor);
+    setFailure("");
+    try {
+      await api(`${base}/open-worktree`, "POST", { editor });
+      notify(
+        editor === "cursor"
+          ? "Opened the worktree in Cursor."
+          : "Opened the worktree in VS Code.",
+      );
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      setFailure(message);
+      notify(message, "error");
+    } finally {
+      setPending("");
+    }
+  };
+  return (
+    <div className="worktree-actions">
+      <button
+        type="button"
+        disabled={!!pending}
+        aria-busy={pending === "cursor"}
+        onClick={() => void open("cursor")}
+      >
+        {pending === "cursor" ? "Opening Cursor…" : "Open in Cursor"}
+      </button>
+      <button
+        type="button"
+        disabled={!!pending}
+        aria-busy={pending === "code"}
+        onClick={() => void open("code")}
+      >
+        {pending === "code" ? "Opening VS Code…" : "Open in VS Code"}
+      </button>
+      {failure && (
+        <p className="inline-error" role="alert">
+          {failure}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function WorktreePath({ worktree, base }: { worktree: string; base: string }) {
+  return (
+    <div className="worktree-entry">
+      <span>Worktree</span>
+      <div>
+        <code>{worktree}</code>
+        <WorktreeActions base={base} />
+      </div>
+    </div>
+  );
+}
+
 function ChangesSection({
   data,
   diff,
@@ -857,10 +932,7 @@ function ChangesSection({
       )}
       {data.run && (
         <div className="run-summary">
-          <div>
-            <span>Worktree</span>
-            <code>{data.run.worktree}</code>
-          </div>
+          <WorktreePath worktree={data.run.worktree} base={base} />
           <div>
             <span>Branch</span>
             <code>{data.run.branch}</code>
@@ -1245,10 +1317,7 @@ function ReviewSection({
             to deliver this branch.
           </p>
           <div className="run-summary">
-            <div>
-              <span>Worktree</span>
-              <code>{data.run.worktree}</code>
-            </div>
+            <WorktreePath worktree={data.run.worktree} base={base} />
             <div>
               <span>Branch</span>
               <code>{data.run.branch}</code>
@@ -1637,21 +1706,42 @@ export function GapPage() {
             </button>
           </section>
           <nav className="stage-rail" aria-label="Workflow stages">
-            {rail.map((item, index) => (
-              <button
-                key={item.id}
-                className={stage === item.id ? "active" : ""}
-                aria-current={item.state === "current" ? "step" : undefined}
-                onClick={() => selectStage(item.id)}
-              >
-                <span className="stage-number">{index + 1}</span>{" "}
-                <span>{item.label}</span>{" "}
-                <span className={`stage-state ${item.state}`}>{item.state}</span>
-              </button>
-            ))}
+            {rail.map((item, index) => {
+              const selected = stage === item.id;
+              const blockerId = `stage-blocker-${item.id}`;
+              const status = stageStatusLabel[item.state];
+              const label = `${selected ? "Selected stage. " : ""}Step ${index + 1}. ${item.label}. ${status}`;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  className={`${item.state}${selected ? " active" : ""}`}
+                  aria-label={label}
+                  aria-current={item.state === "current" ? "step" : undefined}
+                  aria-describedby={
+                    selected && item.blocker ? blockerId : undefined
+                  }
+                  onClick={() => selectStage(item.id)}
+                >
+                  <span className={`stage-mark ${item.state}`} aria-hidden="true">
+                    <Icon name={stageMark[item.state]} size={16} />
+                  </span>
+                  <span className="stage-copy">
+                    <span className="stage-label">{item.label}</span>
+                    <span className={`stage-state ${item.state}`}>
+                      {stageStatusLabel[item.state]}
+                    </span>
+                  </span>
+                </button>
+              );
+            })}
           </nav>
           {stage !== "evidence" && rail.find((item) => item.id === stage)?.blocker && (
-            <p className="stage-blocker">
+            <p
+              className="stage-blocker"
+              id={`stage-blocker-${stage}`}
+              role="status"
+            >
               {rail.find((item) => item.id === stage)?.blocker}
             </p>
           )}

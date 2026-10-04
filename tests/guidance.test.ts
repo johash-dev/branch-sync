@@ -191,5 +191,24 @@ describe("guided next steps", () => {
       /implementation/i,
     );
     expect(workflowStages(gap("open", "present"))[0].state).toBe("current");
+    expect(
+      workflowStages(gap("approved"), plan, run("implementing")).find(
+        (stage) => stage.id === "validate",
+      )?.state,
+    ).toBe("available");
+    const reviewed = workflowStages(gap("changes_requested"), plan, {
+      ...run("implementing"),
+      review: {
+        verdict: "changes_requested",
+        findings: ["Adjust the flag"],
+        at: "now",
+      },
+    });
+    expect(reviewed.find((stage) => stage.id === "validate")?.state).toBe(
+      "available",
+    );
+    expect(reviewed.find((stage) => stage.id === "review")?.state).toBe(
+      "available",
+    );
   });
 });

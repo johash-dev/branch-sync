@@ -7,9 +7,9 @@ Ask a developer who has not used this workbench to complete these tasks without 
 3. From the dashboard, identify the next change and open the stage linked from its status.
 4. On Evidence, record classification, rationale, and source and target evidence. Explain why an unsaved edit warns before leaving. For a no-impact change, record the no-work decision and say when a later scan would reopen it.
 5. On Plan, answer every question and save. On Approve, confirm the saved revision, name yourself, and explain what approval locks.
-6. On Implement, point to the approved scope, the changed-file index, and the diff. Open Activity and explain the job objective, the current action, and how a permission request differs from workbench approval.
+6. On Implement, point to the approved scope, the changed-file index, and the diff. Open the worktree in Cursor and in VS Code with the buttons beside its path. Open Activity and explain the job objective, the current action, and how a permission request differs from workbench approval.
 7. On Validate, read the current check, completed count, elapsed time, and whether the connection is live. Record an observed note for a manual scenario.
-8. On Review, separate independent review, Git handoff, and integration confirmation. Show the links back to the plan, diff, and validation evidence.
+8. On Review, separate independent review, Git handoff, and integration confirmation. From the handoff card, open the same worktree in Cursor or VS Code. Show the links back to the plan, diff, and validation evidence.
 
 Record task completion, confusing moments, and any dead ends. Ask: **“On a scale of 1–10, how easy was it to know what to do next?”** The target is at least 8. Fix blocking findings and repeat the walkthrough before declaring the handoff ready.
 

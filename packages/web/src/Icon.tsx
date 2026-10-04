@@ -5,7 +5,16 @@ export function Icon({
   name,
   size = 20,
 }: {
-  name: "branch" | "dashboard" | "settings" | "terminal" | "inbox";
+  name:
+    | "branch"
+    | "dashboard"
+    | "settings"
+    | "terminal"
+    | "inbox"
+    | "check"
+    | "lock"
+    | "dot"
+    | "circle";
   size?: number;
 }) {
   const paths = {
@@ -44,6 +53,20 @@ export function Icon({
         <path d="M8 8h8" />
       </>
     ),
+    check: <path d="M5 12.5 9.2 16.5 19 7" />,
+    lock: (
+      <>
+        <rect x="6" y="11" width="12" height="8" rx="1.5" />
+        <path d="M8.5 11V8.5a3.5 3.5 0 0 1 7 0V11" />
+      </>
+    ),
+    dot: (
+      <>
+        <circle cx="12" cy="12" r="7" />
+        <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none" />
+      </>
+    ),
+    circle: <circle cx="12" cy="12" r="7" />,
   };
   return (
     <svg
